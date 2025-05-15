@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useTokenMetadata } from '@/app/token-api/_hooks';
+import { useTokenMetadata } from '@/app/token-api/_hooks/useTokenMetadata';
 import { TokenInfo } from '@/components/ui/TokenInfo';
 import { AddressInput } from '@/components/ui/AddressInput';
 import { NetworkSelect } from '@/components/ui/NetworkSelect';
