@@ -12,17 +12,26 @@ export default function GlobalError({
   useEffect(() => {
     // Log the error to an error reporting service
     console.error('Global application error:', error);
+    
+    try {
+      // Ensure theme is applied
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {
+      // Fallback if localStorage is not available
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
   }, [error]);
  
   return (
     <html lang="en">
       <body>
-        <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
+        <div className="flex flex-col items-center justify-center min-h-screen text-center px-4 bg-base-100 text-base-content">
           <h1 className="text-4xl font-bold mb-4">Something went wrong</h1>
-          <p className="text-lg mb-6">We apologize for the inconvenience. Please try again later.</p>
+          <p className="text-lg mb-6">We apologize for the inconvenience. Please try again.</p>
           <button
-            onClick={reset}
-            className="bg-primary text-primary-content font-bold py-2 px-4 rounded hover:opacity-80"
+            onClick={() => reset()}
+            className="bg-primary text-white font-bold py-2 px-4 rounded hover:opacity-80"
           >
             Try again
           </button>
