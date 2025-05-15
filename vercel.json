@@ -1,7 +1,7 @@
 {
   "framework": "nextjs",
   "buildCommand": "npm run build",
-  "installCommand": "npm install --no-optional && npm install --optional @next/swc-linux-x64-gnu @next/swc-linux-x64-musl",
+  "installCommand": "npm install",
   "outputDirectory": ".next",
   "devCommand": "npm run dev",
   "git": {
@@ -10,6 +10,7 @@
     }
   },
   "env": {
-    "NEXT_TELEMETRY_DISABLED": "1"
+    "NEXT_TELEMETRY_DISABLED": "1",
+    "NEXT_IGNORE_PLATFORM_ERRORS": "1"
   }
 }
