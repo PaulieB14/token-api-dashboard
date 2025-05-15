@@ -15,7 +15,7 @@ const nextConfig = {
     } : false,
   },
   // Don't attempt to statically optimize the error pages
-  staticPageGenerationTimeout: 120,
+  staticPageGenerationTimeout: 180,
   typescript: {
     // Allow production builds to successfully complete even with type errors
     ignoreBuildErrors: true,
@@ -27,12 +27,13 @@ const nextConfig = {
   // Skip type checking to speed up builds
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,
-  // Provide a middleware to handle errors
+  // Set output to server mode to avoid static export
+  output: 'export',
   distDir: '.next',
-  output: 'standalone', // This generates a standalone build without external dependencies
   images: {
-    disableStaticImages: true, // Disable static image imports if not using them
+    unoptimized: true,
   },
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;
