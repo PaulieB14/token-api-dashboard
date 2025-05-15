@@ -24,7 +24,7 @@ A comprehensive dashboard for interacting with The Graph Token API. This applica
 
 1. Clone this repository
    ```bash
-   git clone https://github.com/your-username/token-api-dashboard.git
+   git clone https://github.com/PaulieB14/token-api-dashboard.git
    cd token-api-dashboard
    ```
 
@@ -44,6 +44,23 @@ A comprehensive dashboard for interacting with The Graph Token API. This applica
    ```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Deployment to Vercel
+
+This dashboard is optimized for deployment on Vercel. Follow these steps to deploy your own instance:
+
+1. Fork this repository to your GitHub account
+2. Create an account on [Vercel](https://vercel.com) if you don't have one
+3. From your Vercel dashboard, click "New Project"
+4. Import your forked repository
+5. In the project configuration screen:
+   - Set "Framework Preset" to Next.js
+   - Add an environment variable:
+     - Name: `NEXT_PUBLIC_GRAPH_TOKEN`
+     - Value: Your Graph API token
+6. Click "Deploy"
+
+Your dashboard will be automatically built and deployed. Vercel will provide you with a unique URL where your dashboard is accessible.
 
 ## Usage
 
