@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/token-api',
+        permanent: true,
+      },
+    ];
+  },
   reactStrictMode: true,
   // Disable static optimization for routes with dynamic requirements
   experimental: {
