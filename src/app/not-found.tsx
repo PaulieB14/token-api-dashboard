@@ -4,11 +4,7 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 
 export default function NotFound() {
-  // Make sure we're only rendering client-side to avoid serialization issues
-  useEffect(() => {
-    // This component only needs to run on the client
-    document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
-  }, []);
+  // Theme now handled in pages/_app.js
   
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
