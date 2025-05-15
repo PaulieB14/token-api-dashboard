@@ -194,7 +194,7 @@ export interface ContractOHLCResponse {
   token_name?: string;
   token_symbol?: string;
   token_decimals?: number;
-  network_id?: NetworkId;
+  network_id?: string;
   resolution?: string;
   ohlc?: OHLCDataPoint[];
   data?: Array<{
