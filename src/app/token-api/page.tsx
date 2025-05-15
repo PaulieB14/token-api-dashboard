@@ -11,6 +11,8 @@ export default function TokenApiDashboard() {
       description: 'View detailed information about any ERC-20 token',
       link: '/token-api/metadata',
       color: 'bg-blue-500',
+      hoverColor: 'hover:bg-blue-600',
+      borderColor: 'border-blue-500',
     },
     {
       title: 'Token Balances',
@@ -18,6 +20,8 @@ export default function TokenApiDashboard() {
       description: 'Check balances for any wallet address',
       link: '/token-api/balances',
       color: 'bg-green-500',
+      hoverColor: 'hover:bg-green-600',
+      borderColor: 'border-green-500',
     },
     {
       title: 'Holder Analysis',
@@ -25,6 +29,8 @@ export default function TokenApiDashboard() {
       description: 'Explore token distribution and top holders',
       link: '/token-api/holders',
       color: 'bg-purple-500',
+      hoverColor: 'hover:bg-purple-600',
+      borderColor: 'border-purple-500',
     },
     {
       title: 'Transfer History',
@@ -32,6 +38,8 @@ export default function TokenApiDashboard() {
       description: 'Track token transfers with filtering options',
       link: '/token-api/transfers',
       color: 'bg-orange-500',
+      hoverColor: 'hover:bg-orange-600',
+      borderColor: 'border-orange-500',
     },
     {
       title: 'Price Analytics',
@@ -39,6 +47,8 @@ export default function TokenApiDashboard() {
       description: 'Visualize price history and trends',
       link: '/token-api/price',
       color: 'bg-red-500',
+      hoverColor: 'hover:bg-red-600',
+      borderColor: 'border-red-500',
     },
     {
       title: 'Liquidity Pools',
@@ -46,6 +56,8 @@ export default function TokenApiDashboard() {
       description: 'Explore liquidity pools and swap data',
       link: '/token-api/pools',
       color: 'bg-indigo-500',
+      hoverColor: 'hover:bg-indigo-600',
+      borderColor: 'border-indigo-500',
     },
   ];
 
@@ -59,26 +71,25 @@ export default function TokenApiDashboard() {
         </p>
       </div>
       
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
         {features.map((feature) => (
           <Link 
             key={feature.title}
             href={feature.link}
-            className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
+            className={`card shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden text-white ${feature.color} ${feature.hoverColor}`}
           >
             <div className="card-body">
-              <div className={`w-12 h-12 rounded-full ${feature.color} flex items-center justify-center text-white mb-4`}>
+              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-4">
                 {feature.icon}
               </div>
               <h2 className="card-title text-2xl">{feature.title}</h2>
               <p>{feature.description}</p>
             </div>
-            <div className={`h-2 ${feature.color}`}></div>
           </Link>
         ))}
       </div>
       
-      <div className="mt-12 bg-base-200 rounded-lg p-6 shadow-md">
+      <div className="mt-12 bg-base-200 rounded-lg p-6 shadow-md max-w-6xl mx-auto">
         <h2 className="text-2xl font-bold mb-4">About The Graph Token API</h2>
         <p className="mb-4">
           The Graph's Token API provides unified access to token data across multiple EVM networks.
