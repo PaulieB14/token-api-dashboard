@@ -9,7 +9,7 @@ import { getExampleTokenAddress } from '@/app/token-api/_config/exampleTokens';
 import { getTimeRange, getTimeSpanById, TIME_SPANS } from '@/app/token-api/_config/timeConfig';
 import { formatCurrency } from '@/app/token-api/_utils/utils';
 import { formatISO9075 } from 'date-fns';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function TokenPricePage() {
   const [contractAddress, setContractAddress] = useState('');
@@ -195,6 +195,55 @@ export default function TokenPricePage() {
                     strokeWidth={2}
                   />
                 </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Volume Chart */}
+            <h3 className="text-xl font-semibold mt-8 mb-2">Trading Volume</h3>
+            <div className="bg-base-100 p-4 rounded-lg shadow-md h-[200px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart 
+                  data={chartData} 
+                  syncId="priceVolumeSync"
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#cccccc30" />
+                  <XAxis 
+                    dataKey="timestamp" 
+                    type="number"
+                    scale="time"
+                    domain={['auto', 'auto']}
+                    tickFormatter={(timestamp) => {
+                      const date = new Date(timestamp);
+                      return timeSpan === '1d' 
+                        ? date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                        : date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+                    }}
+                  />
+                  <YAxis 
+                    orientation="left"
+                    domain={['auto', 'auto']}
+                    tickFormatter={(value) => formatCurrency(value, 0)} // Format volume
+                  />
+                  <Tooltip 
+                    formatter={(value: number, name: string) => {
+                      if (name === 'Volume') {
+                        return [formatCurrency(value), 'Volume'];
+                      }
+                      return [formatCurrency(value), name];
+                    }}
+                    labelFormatter={(timestamp) => {
+                      const date = new Date(timestamp);
+                      return date.toLocaleString();
+                    }}
+                  />
+                  <Legend />
+                  <Bar 
+                    name="Volume"
+                    dataKey="volume" 
+                    fill="#82ca9d" 
+                  />
+                </BarChart>
               </ResponsiveContainer>
             </div>
           </div>
