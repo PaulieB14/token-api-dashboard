@@ -18,11 +18,11 @@ export interface TokenExample {
 export const EXAMPLE_TOKENS: Record<NetworkId, TokenExample[]> = {
   mainnet: [
     {
-      address: '0xc944E90C64B2c07662A292be6244BDf05Cda44a7',
-      name: 'The Graph',
-      symbol: 'GRT',
-      decimals: 18,
-      description: 'Indexing protocol for querying networks',
+      address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+      name: 'USD Coin',
+      symbol: 'USDC',
+      decimals: 6,
+      description: 'Stablecoin pegged to USD',
     },
     {
       address: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984',
