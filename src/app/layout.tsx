@@ -3,8 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Footer from '@/components/ui/Footer';
 import ThemeProvider from '@/components/providers/ThemeProvider';
+import ThemeInitializer from '@/components/providers/ThemeInitializer';
 import Header from '@/components/ui/Header';
-import ThemeScript from '@/components/providers/ThemeScript';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,11 +20,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        {/* ThemeScript will run before page is interactive */}
-        <ThemeScript />
-      </head>
       <body className={inter.className}>
+        {/* ThemeInitializer handles immediate theme application */}
+        <ThemeInitializer />
+        
+        {/* ThemeProvider manages theme state and context */}
         <ThemeProvider>
           <main className="min-h-screen bg-base-100 text-base-content">
             <Header />
