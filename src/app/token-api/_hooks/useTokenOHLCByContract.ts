@@ -1,6 +1,7 @@
 "use client";
 
-import { ContractOHLCResponse, NetworkId } from "../_types/api";
+import { ContractOHLCResponse } from "../_types/api";
+import { NetworkId } from "../_config/networks";
 import { useTokenApi } from "./useTokenApi";
 
 /**
