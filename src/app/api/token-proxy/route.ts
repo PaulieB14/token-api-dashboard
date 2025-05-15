@@ -3,6 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 // The API URL from the environment variables or use the correct stage URL
 const API_URL = process.env.NEXT_PUBLIC_GRAPH_API_URL || "https://token-api.thegraph.com";
 
+// Mark this route as dynamic to enable search params usage
+export const dynamic = 'force-dynamic';
+
 /**
  * Proxy API Handler for Token API requests
  * This keeps API keys secure and handles authentication properly
