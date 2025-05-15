@@ -11,6 +11,7 @@ A comprehensive dashboard for interacting with The Graph Token API. This applica
 - **Price Charts**: Visualize price history and trends
 - **Liquidity Pools**: Monitor liquidity pool data
 - **Swap Analysis**: Analyze DEX swap data
+- **Theme Support**: Toggle between light and dark themes with persistent storage
 
 ## Getting Started
 
@@ -62,6 +63,16 @@ This dashboard is optimized for deployment on Vercel. Follow these steps to depl
 
 Your dashboard will be automatically built and deployed. Vercel will provide you with a unique URL where your dashboard is accessible.
 
+## Theme Implementation
+
+The dashboard implements a light/dark theme system with the following features:
+
+- Theme preference is saved in local storage
+- System preference detection (automatically uses dark theme if your system prefers it)
+- Fast theme switching with no UI flashes
+- Smooth transitions between themes after initial load
+- Theme toggle button in the header
+
 ## Usage
 
 The dashboard provides a user-friendly interface for interacting with various Token API endpoints:
@@ -71,6 +82,7 @@ The dashboard provides a user-friendly interface for interacting with various To
 - Filter token transfers by address, contract, or time period
 - View interactive price charts with different time intervals
 - Explore liquidity pools and swap data across multiple networks
+- Toggle between light and dark themes using the theme button in the header
 
 ## Supported Networks
 
