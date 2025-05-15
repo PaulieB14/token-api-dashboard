@@ -27,8 +27,8 @@ const nextConfig = {
   // Skip type checking to speed up builds
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,
-  // Set output to server mode to avoid static export
-  output: 'export',
+  // Set to hybrid mode to support both API routes and static pages
+  output: 'standalone',
   distDir: '.next',
   images: {
     unoptimized: true,
