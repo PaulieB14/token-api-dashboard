@@ -8,6 +8,9 @@ import { NetworkSelect } from '@/components/ui/NetworkSelect';
 import { NetworkId, getBlockExplorerAddressUrl } from '@/app/token-api/_config/networks';
 import { formatTokenAmount, formatPercentage, shortenAddress } from '@/app/token-api/_utils/utils';
 import { getExampleTokenAddress } from '@/app/token-api/_config/exampleTokens';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+
+const PIE_CHART_COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82ca9d', '#ffc658', '#FF4560', '#775DD0', '#00E396'];
 
 export default function TokenHoldersPage() {
   const [contractAddress, setContractAddress] = useState('');
@@ -145,6 +148,50 @@ export default function TokenHoldersPage() {
             </h2>
             <div className="badge badge-lg">{totalHolders.toLocaleString()} Total Holders</div>
           </div>
+
+          {/* Pie Chart Section */}
+          {holders.length > 0 && tokenData && (
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold mb-4">Top Holders Distribution (Current Page)</h3>
+              <div className="bg-base-100 p-4 rounded-lg shadow-md h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={holders.filter(h => h.token_share !== undefined && h.token_share !== null)}
+                      dataKey="token_share"
+                      nameKey="address"
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={120}
+                      fill="#8884d8"
+                      labelLine={false}
+                      label={({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+                        const RADIAN = Math.PI / 180;
+                        const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+                        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+                        return (percent * 100) > 2 ? ( // Only show label if share > 2%
+                          <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+                            {`${(percent * 100).toFixed(1)}%`}
+                          </text>
+                        ) : null;
+                      }}
+                    >
+                      {holders.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={PIE_CHART_COLORS[index % PIE_CHART_COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value: number, name: string) => [`${formatPercentage(value)}`, `${shortenAddress(name)}`]} />
+                    <Legend 
+                      formatter={(value, entry) => (
+                        <span style={{ color: entry.color }}>{shortenAddress(value)}</span>
+                      )}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          )}
           
           <div className="overflow-x-auto">
             <table className="table w-full">
