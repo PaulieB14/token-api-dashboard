@@ -1,30 +1,27 @@
 'use client';
- 
+
+import Link from 'next/link';
 import { useEffect } from 'react';
- 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+
+export default function Error() {
+  // Make sure we're only rendering client-side to avoid serialization issues
   useEffect(() => {
-    // Log the error to an error reporting service
-    console.error('Application error:', error);
-    // Theme is now handled in pages/_app.js
-  }, [error]);
- 
+    // This component only needs to run on the client
+    try {
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  }, []);
+  
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-      <h1 className="text-4xl font-bold mb-4">Something went wrong</h1>
-      <p className="text-lg mb-6">We apologize for the inconvenience. Please try again.</p>
-      <button
-        onClick={() => reset()}
-        className="bg-primary text-primary-content font-bold py-2 px-4 rounded hover:opacity-80"
-      >
-        Try again
-      </button>
+      <h1 className="text-4xl font-bold mb-4">500 - Server Error</h1>
+      <p className="text-lg mb-6">Something went wrong on our end. Please try again later.</p>
+      <Link href="/" className="bg-primary text-white font-bold py-2 px-4 rounded hover:opacity-80">
+        Return to Home
+      </Link>
     </div>
   );
 }
