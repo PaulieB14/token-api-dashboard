@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
+import ThemeInitializer from './ThemeInitializer';
 
 type Theme = 'light' | 'dark';
 
@@ -28,35 +29,36 @@ export default function ThemeProvider({
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
   };
 
-  // Initialize theme from localStorage or system preference
+  // Initialize theme from localStorage on mount
   useEffect(() => {
-    // Ensure theme transitions happen ONLY after initial load
-    const enableTransition = () => {
-      document.documentElement.classList.add('theme-transition');
-    };
-
-    // Set mounted to true to avoid hydration mismatch
+    // Only run on client after mount
     setMounted(true);
     
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-    setTheme(initialTheme);
-    document.documentElement.setAttribute('data-theme', initialTheme);
-    
-    // Add transition class after a small delay to prevent 
-    // initial flash between themes
-    setTimeout(enableTransition, 100);
+    try {
+      const savedTheme = localStorage.getItem('theme') as Theme | null;
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+      }
+    } catch (error) {
+      console.error('Error accessing localStorage:', error);
+    }
   }, []);
 
-  // Avoid hydration mismatch by only rendering children when mounted
+  // Avoid hydration mismatch
   if (!mounted) {
-    return null;
+    return (
+      <>
+        <ThemeInitializer />
+        {children}
+      </>
+    );
   }
 
   return (
