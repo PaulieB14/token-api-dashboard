@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useTokenOHLCByContract } from '@/app/token-api/_hooks';
+import { useTokenOHLCByContract } from '@/app/token-api/_hooks/useTokenOHLCByContract';
 import { AddressInput } from '@/components/ui/AddressInput';
 import { NetworkSelect } from '@/components/ui/NetworkSelect';
 import { NetworkId } from '@/app/token-api/_config/networks';

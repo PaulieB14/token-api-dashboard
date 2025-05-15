@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useTokenPools } from '@/app/token-api/_hooks';
+import { useTokenPools } from '@/app/token-api/_hooks/useTokenPools';
 import { AddressInput } from '@/components/ui/AddressInput';
 import { NetworkSelect } from '@/components/ui/NetworkSelect';
 import { NetworkId, getBlockExplorerAddressUrl } from '@/app/token-api/_config/networks';
