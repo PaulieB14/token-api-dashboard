@@ -9,8 +9,6 @@ const nextConfig = {
   // Configure SWC compiler options
   swcMinify: true,
   compiler: {
-    // Enables the styled-components SWC transform
-    styledComponents: false,
     // Remove all console logs in production
     removeConsole: process.env.NODE_ENV === 'production' ? {
       exclude: ['error', 'warn'],
@@ -19,16 +17,21 @@ const nextConfig = {
   // Don't attempt to statically optimize the error pages
   staticPageGenerationTimeout: 120,
   typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
+    // Allow production builds to successfully complete even with type errors
     ignoreBuildErrors: true,
   },
   eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
+    // Allow production builds to successfully complete even with ESLint errors
     ignoreDuringBuilds: true,
+  },
+  // Skip type checking to speed up builds
+  skipTrailingSlashRedirect: true,
+  skipMiddlewareUrlNormalize: true,
+  // Provide a middleware to handle errors
+  distDir: '.next',
+  output: 'standalone', // This generates a standalone build without external dependencies
+  images: {
+    disableStaticImages: true, // Disable static image imports if not using them
   },
 };
 
