@@ -6,10 +6,40 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: {
+        'colors': 'background-color, border-color, color, fill, stroke',
+      },
+      transitionDuration: {
+        '0': '0ms',
+      },
+    },
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: ['light', 'dark'],
+    themes: [
+      {
+        light: {
+          ...require('daisyui/src/theming/themes')['[data-theme=light]'],
+          // Ensure immediate theme application
+          "--animation-btn": "0", // disable button animations
+          "--animation-input": "0", // disable input animations
+          "--btn-text-case": "none",
+        },
+        dark: {
+          ...require('daisyui/src/theming/themes')['[data-theme=dark]'],
+          // Ensure immediate theme application
+          "--animation-btn": "0", // disable button animations
+          "--animation-input": "0", // disable input animations
+          "--btn-text-case": "none",
+        },
+      },
+    ],
+    darkTheme: "dark",
+    base: true,
+    styled: true,
+    utils: true,
+    prefix: "",
+    logs: true,
   },
 };
