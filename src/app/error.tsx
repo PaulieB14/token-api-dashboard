@@ -12,8 +12,7 @@ export default function Error({
   useEffect(() => {
     // Log the error to an error reporting service
     console.error('Application error:', error);
-    // Ensure theme is applied
-    document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
+    // Theme is now handled in pages/_app.js
   }, [error]);
  
   return (
