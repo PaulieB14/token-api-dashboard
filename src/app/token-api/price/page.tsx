@@ -51,8 +51,10 @@ export default function TokenPricePage() {
   // Get current price and change
   const currentPrice = chartData.length > 0 ? chartData[chartData.length - 1].price : null;
   const previousPrice = chartData.length > 1 ? chartData[0].price : null;
-  const priceChange = currentPrice && previousPrice ? currentPrice - previousPrice : null;
-  const priceChangePercent = currentPrice && previousPrice ? (priceChange / previousPrice) * 100 : null;
+  const priceChange = currentPrice !== null && previousPrice !== null ? currentPrice - previousPrice : null;
+  const priceChangePercent = currentPrice !== null && previousPrice !== null && priceChange !== null 
+    ? (priceChange / previousPrice) * 100 
+    : null;
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -140,7 +142,7 @@ export default function TokenPricePage() {
               <div className="stat">
                 <div className="stat-title">Current Price</div>
                 <div className="stat-value text-xl">{currentPrice ? formatCurrency(currentPrice) : '-'}</div>
-                {priceChange && priceChangePercent && (
+                {priceChange !== null && priceChangePercent !== null && (
                   <div className={`stat-desc ${priceChange >= 0 ? 'text-green-500' : 'text-red-500'}`}>
                     {priceChange >= 0 ? '↗︎' : '↘︎'} {formatCurrency(Math.abs(priceChange))}
                     ({priceChangePercent >= 0 ? '+' : ''}{priceChangePercent.toFixed(2)}%)
