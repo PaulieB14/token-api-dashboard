@@ -5,6 +5,7 @@ import Footer from '@/components/ui/Footer';
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import Header from '@/components/ui/Header';
 import ThemeHeadScript from '@/components/providers/ThemeHeadScript';
+import ThemeInit from '@/lib/theme';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ThemeProvider>
+          <ThemeInit />
           <main className="min-h-screen bg-base-100 text-base-content">
             <Header />
             <div className="container mx-auto px-4 py-8">
