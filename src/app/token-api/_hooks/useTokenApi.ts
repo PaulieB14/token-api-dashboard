@@ -1,25 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-/**
- * API response wrapper
- */
-export interface ApiResponse<T> {
-  data?: T;
-  error?: {
-    message: string;
-    status: number;
-  };
-}
-
-/**
- * Hook options for useTokenApi
- */
-export interface TokenApiOptions {
-  skip?: boolean;
-  refetchInterval?: number;
-}
+import { TokenApiOptions } from "../_types/api";
 
 /**
  * Base hook for interacting with the Token API through the proxy endpoint
