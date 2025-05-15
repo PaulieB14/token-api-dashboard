@@ -17,24 +17,7 @@ module.exports = {
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: [
-      {
-        light: {
-          ...require('daisyui/src/theming/themes')['[data-theme=light]'],
-          // Ensure immediate theme application
-          "--animation-btn": "0", // disable button animations
-          "--animation-input": "0", // disable input animations
-          "--btn-text-case": "none",
-        },
-        dark: {
-          ...require('daisyui/src/theming/themes')['[data-theme=dark]'],
-          // Ensure immediate theme application
-          "--animation-btn": "0", // disable button animations
-          "--animation-input": "0", // disable input animations
-          "--btn-text-case": "none",
-        },
-      },
-    ],
+    themes: ["light", "dark"],
     darkTheme: "dark",
     base: true,
     styled: true,
